@@ -2,7 +2,7 @@
 import math
 import pytest
 
-from src.space_sim.physics.gravity import solve_keplers_equation
+from space_sim.physics.gravity import solve_keplers_equation
 
 
 def test_kepler_zero_eccentricity():
