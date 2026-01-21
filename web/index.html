@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Space Sim Viewer (Three.js)</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <style>
+    html, body { margin: 0; padding: 0; overflow: hidden; }
+    #hud {
+      position: absolute; top: 10px; left: 10px; padding: 10px;
+      background: rgba(0,0,0,0.6); color: white; font-family: sans-serif;
+      border-radius: 10px;
+    }
+    #hud button, #hud input { margin-top: 6px; width: 180px; }
+  </style>
+</head>
+<body>
+  <div id="hud">
+    <div><b>Space Sim Viewer</b></div>
+
+    <div style="margin-top:8px;">
+      <button id="playBtn">Play</button>
+      <button id="pauseBtn">Pause</button>
+    </div>
+
+    <div style="margin-top:8px;">Time:</div>
+    <input id="timeSlider" type="range" min="0" max="100" value="0" />
+    <div id="timeLabel">t=0</div>
+
+    <hr style="opacity:0.3; margin:10px 0;" />
+
+    <div><b>Selection</b></div>
+    <select id="satSelect" style="width: 220px; margin-top:6px;">
+      <option value="">(none)</option>
+    </select>
+    <div id="selectedSat">Satellite: (none)</div>
+    <div id="selectedGs">Ground Station: (none)</div>
+    <button id="clearSelectionBtn">Clear Selection</button>
+
+    <hr style="opacity:0.3; margin:10px 0;" />
+
+    <div><b>Visibility</b></div>
+    <div id="visModeLabel">Mode: ANY satellite</div>
+    <div id="visList" style="margin-top:6px; max-width:260px; line-height:1.25;"></div>
+
+    <hr style="opacity:0.3; margin:10px 0;" />
+
+    <div><b>Camera</b></div>
+    <button id="followBtn">Follow: OFF</button>
+
+    <hr style="opacity:0.3; margin:10px 0;" />
+    <div><b>Coverage (Hover)</b></div>
+    <div id="hoverInfo" style="line-height:1.25;"></div>
+
+    <hr style="opacity:0.3; margin:10px 0;" />
+    <div><b>Coverage Heatmap</b></div>
+
+    <select id="coverageSelect" style="width: 220px; margin-top:6px;">
+      <option value="../out/coverage_SAT-001.json">SAT-001</option>
+      <option value="../out/coverage_SAT-002.json">SAT-002</option>
+      <option value="../out/coverage_CONSTELLATION.json">CONSTELLATION</option>
+    </select>
+
+    <button id="toggleCoverageBtn" style="width: 220px; margin-top:6px;">Coverage: OFF</button>
+
+    <div style="margin-top:10px; font-size:12px; opacity:0.85;">
+      Tip: click a satellite or ground station.
+    </div>
+  </div>
+
+  <script type="module" src="./viewer.js"></script>
+</body>
+</html>
