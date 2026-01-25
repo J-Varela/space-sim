@@ -12,7 +12,7 @@
 *.ini   text
 *.html  text
 *.js    text
-src/*.html text
+src/*.html linguist-vendored
 
 # Declare files that will always have CRLF line endings on checkout
 *.bat   text eol=crlf
