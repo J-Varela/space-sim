@@ -138,17 +138,30 @@ def parse_exponential_notation(s: str) -> float:
         Float value
     """
     s = s.strip()
-    if not s or s == '+00000-0' or s == '-00000-0':
+    if not s or s == '+00000-0' or s == '-00000-0' or s == '00000-0':
+        return 0.0
+    
+    # Handle various formats
+    if len(s) < 6:
         return 0.0
     
     # Format: ±XXXXX±Y means ±0.XXXXX × 10^±Y
     sign = 1.0 if s[0] != '-' else -1.0
     mantissa_str = s[1:6]
-    exp_sign_char = s[6]
-    exp_str = s[7]
     
-    mantissa = float(mantissa_str) / 100000.0
-    exponent = int(exp_str)
+    # Check if we have exponent part
+    if len(s) > 6:
+        exp_sign_char = s[6] if len(s) > 6 else '+'
+        exp_str = s[7] if len(s) > 7 else '0'
+    else:
+        exp_sign_char = '+'
+        exp_str = '0'
+    
+    try:
+        mantissa = float(mantissa_str) / 100000.0
+        exponent = int(exp_str)
+    except ValueError:
+        return 0.0
     
     if exp_sign_char == '-':
         exponent = -exponent
